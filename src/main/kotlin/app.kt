@@ -51,9 +51,7 @@ class SpeakNotificationsService: NotificationListenerService(), TextToSpeech.OnI
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         val notification = sbn.getNotification()
         val extras = notification.extras
-        /*if(extras.getCharSequence(Notification.EXTRA_TEMPLATE) == "android.app.Notification\$InboxStyle")
-            return*/
-        if(extras.getCharSequence(Notification.EXTRA_TEMPLATE) != "android.app.Notification\$BigTextStyle")
+        if(extras.getCharSequence(Notification.EXTRA_TEMPLATE) == "android.app.Notification\$InboxStyle")
             return
         var text: String = extras.getCharSequence(Notification.EXTRA_TITLE) as String
         if(extras.getCharSequence(Notification.EXTRA_TEXT) != null)
