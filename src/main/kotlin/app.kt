@@ -51,12 +51,12 @@ class SpeakNotificationsService: NotificationListenerService(), TextToSpeech.OnI
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         val notification = sbn.getNotification()
         val extras = notification.extras
+        Log.d("notificationtest", notification.extras.toString())
         if(extras.getCharSequence(Notification.EXTRA_TEMPLATE) == "android.app.Notification\$InboxStyle")
             return
         var text: String = extras.getCharSequence(Notification.EXTRA_TITLE) as String
         if(extras.getCharSequence(Notification.EXTRA_TEXT) != null)
             text += ": ${extras.getCharSequence(Notification.EXTRA_TEXT)}"
-        Log.d("notificationtest", notification.extras.toString())
         Log.d("notificationtest", text.toString())
         if(ttsInitialized && text != "" && getCurrentInterruptionFilter() == NotificationListenerService.INTERRUPTION_FILTER_ALL && getCurrentListenerHints() == 0)
             tts?.speak(text, TextToSpeech.QUEUE_ADD, null, System.currentTimeMillis().toString())
